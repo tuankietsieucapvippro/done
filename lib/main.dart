@@ -11,7 +11,49 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // Tắt banner debug
-      home: InputPage(), // Trang đầu tiên
+      home: PasswordInput(), // Trang đầu tiên
+    );
+  }
+}
+
+class PasswordInput extends StatefulWidget {
+  @override
+  _PasswordInputState createState() => _PasswordInputState();
+}
+
+class _PasswordInputState extends State<PasswordInput> {
+  final TextEditingController _controller = TextEditingController();
+  String storedPassword = 'yourPassword';
+
+  void checkPassword() {
+    if (_controller.text == storedPassword) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => InputPage()),
+      );
+    } else {
+      // Sai
+      _controller.clear();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TextField(
+          controller: _controller,
+          obscureText: true,
+          decoration: InputDecoration(
+            labelText: 'Nhập gì đi',
+            border: OutlineInputBorder(),
+          ),
+        ),
+        ElevatedButton(
+          onPressed: checkPassword,
+          child: Text('Gửi'),
+        ),
+      ],
     );
   }
 }
@@ -40,7 +82,7 @@ class InputPage extends StatelessWidget {
                 // Nút 1: Hiển thị ảnh 1
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => DisplayPage(
@@ -55,7 +97,7 @@ class InputPage extends StatelessWidget {
                 // Nút 2: Hiển thị ảnh 2
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => DisplayPage(
@@ -70,7 +112,7 @@ class InputPage extends StatelessWidget {
                 // Nút 3: Hiển thị ảnh 3
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => DisplayPage(
@@ -118,7 +160,7 @@ class DisplayPage extends StatelessWidget {
             child: Text(
               formattedTime, // Thời gian hiện tại
               style: const TextStyle(
-                fontSize: 40,
+                fontSize: 13,
                 fontWeight: FontWeight.bold,
                 color: Color (0xFF646464), 
                 
