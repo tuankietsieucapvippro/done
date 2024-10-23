@@ -39,24 +39,31 @@ class _PasswordInputState extends State<PasswordInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextField(
-          controller: _controller,
-          obscureText: true,
-          decoration: InputDecoration(
-            labelText: 'Nhập gì đi',
-            border: OutlineInputBorder(),
-          ),
+    return Scaffold(
+      body: Center( // Đưa nội dung vào giữa màn hình
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center, // Căn giữa theo trục dọc
+          children: [
+            TextField(
+              controller: _controller,
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'Nhập gì đi',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 20), // Khoảng cách giữa ô nhập và nút
+            ElevatedButton(
+              onPressed: checkPassword,
+              child: Text('Gửi'),
+            ),
+          ],
         ),
-        ElevatedButton(
-          onPressed: checkPassword,
-          child: Text('Gửi'),
-        ),
-      ],
+      ),
     );
   }
 }
+
 
 class InputPage extends StatelessWidget {
   const InputPage({super.key});
@@ -82,46 +89,49 @@ class InputPage extends StatelessWidget {
                 // Nút 1: Hiển thị ảnh 1
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
+                    Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
                         builder: (context) => DisplayPage(
                           imagePath: 'images/a.jpeg', // Đường dẫn tới ảnh 1
                         ),
                       ),
+                      (Route<dynamic> route) => false,
                     );
                   },
-                  child: const Text(""),
+                  child: const Text(":D"),
                 ),
                 const SizedBox(height: 20),
                 // Nút 2: Hiển thị ảnh 2
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
+                    Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
                         builder: (context) => DisplayPage(
                           imagePath: 'images/b.jpeg', // Đường dẫn tới ảnh 2
                         ),
                       ),
+                      (Route<dynamic> route) => false,
                     );
                   },
-                  child: const Text(""),
+                  child: const Text("=)"),
                 ),
                 const SizedBox(height: 20),
                 // Nút 3: Hiển thị ảnh 3
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
+                    Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
                         builder: (context) => DisplayPage(
                           imagePath: 'images/img3.png', // Đường dẫn tới ảnh 3
                         ),
                       ),
+                      (Route<dynamic> route) => false,
                     );
                   },
-                  child: const Text(""),
+                  child: const Text("^^"),
                 ),
               ],
             ),
