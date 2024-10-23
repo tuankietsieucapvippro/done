@@ -113,8 +113,8 @@ class DisplayPage extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 818, // Căn từ đáy màn hình 50px
-            left: 445,   // Căn từ trái màn hình 20px
+            top: 273, // Căn từ đáy màn hình 50px
+            left: 148,   // Căn từ trái màn hình 20px
             child: Text(
               formattedTime, // Thời gian hiện tại
               style: const TextStyle(
