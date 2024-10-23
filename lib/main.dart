@@ -160,8 +160,7 @@ class DisplayPage extends StatelessWidget {
             child: Text(
               formattedTime, // Thời gian hiện tại
               style: const TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.bold,
+                fontSize: 9,
                 color: Color (0xFF646464), 
                 
               ),
