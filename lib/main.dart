@@ -23,7 +23,7 @@ class PasswordInput extends StatefulWidget {
 
 class _PasswordInputState extends State<PasswordInput> {
   final TextEditingController _controller = TextEditingController();
-  String storedPassword = 'yourPassword';
+  String storedPassword = 'dangcap';
 
   void checkPassword() {
     if (_controller.text == storedPassword) {
