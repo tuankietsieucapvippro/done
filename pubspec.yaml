@@ -97,4 +97,5 @@ flutter:
 flutter_icons:
   android: true
   ios: true
-  image_path: "image/d.png" # Đường dẫn đến ảnh icon
+  image_path: "images/d.png" # Đường dẫn đến ảnh icon
+
