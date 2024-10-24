@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:screen_brightness/screen_brightness.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,6 +26,17 @@ class _PasswordInputState extends State<PasswordInput> {
   final TextEditingController _controller = TextEditingController();
   String storedPassword = 'dangcap';
 
+  @override
+  void initState() {
+    super.initState();
+    _reduceBrightness();  // Giảm sáng khi trang khởi tạo
+  }
+
+  // Hàm giảm độ sáng màn hình
+  void _reduceBrightness() async {
+    await ScreenBrightness().setScreenBrightness(0); // Giảm sáng còn 20%
+  }
+
   void checkPassword() {
     if (_controller.text == storedPassword) {
       Navigator.push(
@@ -40,45 +52,48 @@ class _PasswordInputState extends State<PasswordInput> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          // Nội dung trang
-          Center( // Đưa nội dung vào giữa màn hình
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center, // Căn giữa theo trục dọc
-              children: [
-                TextField(
-                  controller: _controller,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: 'Nhập gì đi',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(height: 20), // Khoảng cách giữa ô nhập và nút
-                ElevatedButton(
-                  onPressed: checkPassword,
-                  child: Text('Gửi'),
-                ),
-              ],
+      body: Center( // Đưa nội dung vào giữa màn hình
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center, // Căn giữa theo trục dọc
+          children: [
+            TextField(
+              controller: _controller,
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'Nhập gì đi',
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
-          // Lớp phủ bán trong suốt để giảm độ sáng
-          Positioned.fill(
-            child: Container(
-              color: Colors.black.withOpacity(0.8), // Độ tối, điều chỉnh độ mờ ở đây
+            const SizedBox(height: 20), // Khoảng cách giữa ô nhập và nút
+            ElevatedButton(
+              onPressed: checkPassword,
+              child: Text('Gửi'),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
 
 
-
-class InputPage extends StatelessWidget {
+class InputPage extends StatefulWidget {
   const InputPage({super.key});
+  @override
+  _InputPageState createState() => _InputPageState();
+}
+
+class _InputPageState extends State<InputPage> {
+  @override
+  void initState() {
+    super.initState();
+    _reduceBrightness();  // Giảm sáng khi trang khởi tạo
+  }
+
+  // Hàm giảm độ sáng màn hình
+  void _reduceBrightness() async {
+    await ScreenBrightness().setScreenBrightness(0); // Giảm sáng còn 20%
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,18 +163,11 @@ class InputPage extends StatelessWidget {
               ],
             ),
           ),
-          // Lớp phủ bán trong suốt để giảm độ sáng
-          Positioned.fill(
-            child: Container(
-              color: Colors.black.withOpacity(0.8), // Điều chỉnh độ mờ ở đây
-            ),
-          ),
         ],
       ),
     );
   }
 }
-
 
 // Trang hiển thị ảnh với đường dẫn được truyền vào
 class DisplayPage extends StatelessWidget {
@@ -170,6 +178,11 @@ class DisplayPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _restoreBrightness() async {
+      await ScreenBrightness().resetScreenBrightness(); // Khôi phục lại độ sáng mặc định của hệ thống
+    }
+
+    _restoreBrightness(); // Gọi hàm khi trang được xây dựng
     final now = DateTime.now();
     final formattedTime =
         '${now.hour}:${now.minute} - ${now.day}/${now.month}/${now.year}';
