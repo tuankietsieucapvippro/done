@@ -57,6 +57,7 @@ flutter:
     - images/a.jpeg
     - images/b.jpeg
     - images/c.jpg
+    - images/e.jpeg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

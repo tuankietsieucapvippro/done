@@ -40,29 +40,41 @@ class _PasswordInputState extends State<PasswordInput> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center( // Đưa nội dung vào giữa màn hình
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // Căn giữa theo trục dọc
-          children: [
-            TextField(
-              controller: _controller,
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Nhập gì đi',
-                border: OutlineInputBorder(),
-              ),
+      body: Stack(
+        children: [
+          // Nội dung trang
+          Center( // Đưa nội dung vào giữa màn hình
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center, // Căn giữa theo trục dọc
+              children: [
+                TextField(
+                  controller: _controller,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: 'Nhập gì đi',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 20), // Khoảng cách giữa ô nhập và nút
+                ElevatedButton(
+                  onPressed: checkPassword,
+                  child: Text('Gửi'),
+                ),
+              ],
             ),
-            const SizedBox(height: 20), // Khoảng cách giữa ô nhập và nút
-            ElevatedButton(
-              onPressed: checkPassword,
-              child: Text('Gửi'),
+          ),
+          // Lớp phủ bán trong suốt để giảm độ sáng
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withOpacity(0.8), // Độ tối, điều chỉnh độ mờ ở đây
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
+
 
 
 class InputPage extends StatelessWidget {
@@ -99,7 +111,7 @@ class InputPage extends StatelessWidget {
                       (Route<dynamic> route) => false,
                     );
                   },
-                  child: const Text(":D"),
+                  child: const Text("20"),
                 ),
                 const SizedBox(height: 20),
                 // Nút 2: Hiển thị ảnh 2
@@ -109,13 +121,13 @@ class InputPage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => DisplayPage(
-                          imagePath: 'images/b.jpeg', // Đường dẫn tới ảnh 2
+                          imagePath: 'images/e.jpeg', // Đường dẫn tới ảnh 2
                         ),
                       ),
                       (Route<dynamic> route) => false,
                     );
                   },
-                  child: const Text("=)"),
+                  child: const Text("40"),
                 ),
                 const SizedBox(height: 20),
                 // Nút 3: Hiển thị ảnh 3
@@ -125,15 +137,21 @@ class InputPage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => DisplayPage(
-                          imagePath: 'images/img3.png', // Đường dẫn tới ảnh 3
+                          imagePath: 'images/b.jpeg', // Đường dẫn tới ảnh 3
                         ),
                       ),
                       (Route<dynamic> route) => false,
                     );
                   },
-                  child: const Text("^^"),
+                  child: const Text("17"),
                 ),
               ],
+            ),
+          ),
+          // Lớp phủ bán trong suốt để giảm độ sáng
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withOpacity(0.8), // Điều chỉnh độ mờ ở đây
             ),
           ),
         ],
@@ -141,6 +159,7 @@ class InputPage extends StatelessWidget {
     );
   }
 }
+
 
 // Trang hiển thị ảnh với đường dẫn được truyền vào
 class DisplayPage extends StatelessWidget {
